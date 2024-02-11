@@ -29,12 +29,12 @@ msg = st.chat_input("Input something")
 
 prompt = 'Condense the provided text into concise bullet points, selecting a fitting emoji for each using the contents:'
 
-msg = f'''{prompt}
-
-{msg}
-'''
 
 if msg:
+    msg = f'''{prompt}
+
+    {msg}
+'''
     msg_en = chatbot.chat(msg)
 
     st.markdown("### 원문")
