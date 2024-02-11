@@ -4,6 +4,8 @@ from hugchat.login import Login
 from deep_translator import GoogleTranslator
 
 
+st.set_page_config(page_title="Summarise and translate with HuggingChat", page_icon="random")
+
 email = st.secrets["hg_email"]
 passwd = st.secrets["hg_passwd"]
 
@@ -25,7 +27,7 @@ st.header("HuggingChat Bot Test")
 
 msg = st.chat_input("Input something")
 
-prompt = 'Condense the provided text into concise bullet points, selecting a fitting emoji for each, and respond in Korean  using the contents:'
+prompt = 'Condense the provided text into concise bullet points, selecting a fitting emoji for each using the contents:'
 
 msg = f'''{prompt}
 
@@ -35,7 +37,9 @@ msg = f'''{prompt}
 if msg:
     msg_en = chatbot.chat(msg)
 
+    st.markdown("### 원문")
     st.write(msg_en)
 
     msg_ko = translation(str(msg_en))
+    st.markdown("### 번역")
     st.write(msg_ko)
