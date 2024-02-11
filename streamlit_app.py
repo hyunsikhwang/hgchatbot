@@ -12,6 +12,12 @@ passwd = st.secrets["hg_passwd"]
 # Log in to huggingface and grant authorization to huggingchat
 sign = Login(email, passwd)
 cookies = sign.login()
+
+# Save cookies to the local directory
+cookie_path_dir = "./cookies_snapshot"
+sign.saveCookiesToDir(cookie_path_dir)
+# cookies = sign.loadCookiesFromDir(cookie_path_dir) # This will detect if the JSON file exists, return cookies if it does and raise an Exception if it's not.
+
 chatbot = hugchat.ChatBot(cookies=cookies.get_dict())
 
 # start a new conversation
