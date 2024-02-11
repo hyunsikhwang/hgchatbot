@@ -25,6 +25,13 @@ st.header("HuggingChat Bot Test")
 
 msg = st.chat_input("Input something")
 
+prompt = 'Condense the provided text into concise bullet points, selecting a fitting emoji for each, and respond in Korean  using the contents:'
+
+msg = f'''{prompt}
+
+{msg}
+'''
+
 if msg:
     msg_en = chatbot.chat(msg)
 
