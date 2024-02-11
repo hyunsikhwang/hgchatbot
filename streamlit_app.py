@@ -44,8 +44,8 @@ if msg:
     msg_en = chatbot.chat(msg)
 
     st.markdown("#### 원문")
-    st.text(msg_en)
+    st.write(msg_en)
 
     msg_ko = translation(str(msg_en))
     st.markdown("#### 번역")
-    st.text(msg_ko)
+    st.write(msg_ko)
