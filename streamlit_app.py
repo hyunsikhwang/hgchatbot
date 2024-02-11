@@ -10,8 +10,8 @@ email = st.secrets["hg_email"]
 passwd = st.secrets["hg_passwd"]
 
 # Log in to huggingface and grant authorization to huggingchat
-sign = Login(email, passwd)
-cookies = sign.login()
+# sign = Login(email, passwd)
+# cookies = sign.login()
 
 # Save cookies to the local directory
 cookie_path_dir = "./cookies_snapshot"
