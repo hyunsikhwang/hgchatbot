@@ -25,7 +25,7 @@ def translation(sentence):
 
 st.header("HuggingChat Bot Test")
 
-msg = st.chat_input("Input something")
+msg = st.chat_input("Input what you want to summarise")
 
 prompt = 'Condense the provided text into concise bullet points, selecting a fitting emoji for each using the contents:'
 
