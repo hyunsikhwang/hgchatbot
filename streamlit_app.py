@@ -29,7 +29,7 @@ def translation(sentence):
 
     return translated
 
-st.header("HuggingChat Bot Test")
+st.header("Summary Bot with HuggingChat")
 
 msg = st.chat_input("Input what you want to summarise")
 
@@ -43,9 +43,9 @@ if msg:
 '''
     msg_en = chatbot.chat(msg)
 
-    st.markdown("### 원문")
+    st.markdown("#### 원문")
     st.write(msg_en)
 
     msg_ko = translation(str(msg_en))
-    st.markdown("### 번역")
+    st.markdown("#### 번역")
     st.write(msg_ko)
