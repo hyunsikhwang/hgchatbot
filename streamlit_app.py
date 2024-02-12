@@ -34,7 +34,7 @@ st.header("Summary Bot with HuggingChat")
 msg = st.chat_input("Input what you want to summarise")
 
 prompt = 'Condense the provided text into concise bullet points, selecting a fitting emoji for each using the contents:'
-
+prompt = 'Condense the provided text into English and Korean separately using concise bullet points, and use the content to select the appropriate emoji for each:'
 
 if msg:
     msg = f'''{prompt}
