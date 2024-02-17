@@ -2,6 +2,7 @@ import streamlit as st
 from hugchat import hugchat
 from hugchat.login import Login
 from deep_translator import GoogleTranslator
+import trafilatura as tft
 
 
 st.set_page_config(page_title="Summarise and translate with HuggingChat", page_icon="random")
@@ -10,15 +11,15 @@ email = st.secrets["hg_email"]
 passwd = st.secrets["hg_passwd"]
 
 # Log in to huggingface and grant authorization to huggingchat
-sign = Login(email, passwd)
+# sign = Login(email, passwd)
 # cookies = sign.login()
 
 # Save cookies to the local directory
 cookie_path_dir = "./cookies_snapshot"
-sign.saveCookiesToDir(cookie_path_dir)
-cookies = sign.loadCookiesFromDir(cookie_path_dir) # This will detect if the JSON file exists, return cookies if it does and raise an Exception if it's not.
-
-chatbot = hugchat.ChatBot(cookies=cookies.get_dict())
+# sign.saveCookiesToDir(cookie_path_dir)
+# cookies = sign.loadCookiesFromDir(cookie_path_dir) # This will detect if the JSON file exists, return cookies if it does and raise an Exception if it's not.
+# chatbot = hugchat.ChatBot(cookies=cookies.get_dict())
+chatbot = hugchat.ChatBot(cookie_path=f"{cookie_path_dir}/{email}.json")
 
 system_prompt = '''
 Please summarize the content of the user's sentences in 5 to 10 bullet points or less and translate in Korean. You don't necessarily have to stick to the 10 bullet points, just create enough bullet points to fit the length of the entire sentence.
@@ -41,19 +42,15 @@ st.header("Summary Bot with HuggingChat")
 
 msg = st.chat_input("Input what you want to summarise")
 
-prompt = 'Condense the provided text into concise bullet points, selecting a fitting emoji for each using the contents:'
-prompt = 'Condense the provided text into English and Korean separately using concise bullet points, and use the content to select the appropriate emoji for each:'
+# prompt = 'Condense the provided text into concise bullet points, selecting a fitting emoji for each using the contents:'
+# prompt = 'Condense the provided text into English and Korean separately using concise bullet points, and use the content to select the appropriate emoji for each:'
 
-if msg:
-    msg = f'''{prompt}
+if msg[:7] == 'http://' or msg[:8] == 'https://':
+    downloaded = tft.fetch_url(msg)
+    txt = tft.extract(downloaded)
+else:
+    txt = msg
 
-    {msg}
-'''
-    msg_en = chatbot.chat(msg)
+msg_res = chatbot.chat(txt)
 
-    st.markdown("#### 원문")
-    st.write(msg_en)
-
-    msg_ko = translation(str(msg_en))
-    st.markdown("#### 번역")
-    st.write(msg_ko)
+st.write(msg_res)
