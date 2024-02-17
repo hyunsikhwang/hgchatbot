@@ -19,8 +19,8 @@ except:
     # Log in to huggingface and grant authorization to huggingchat
     sign = Login(email, passwd)
     cookies = sign.login()
-    # sign.saveCookiesToDir(cookie_path_dir)
-    # cookies = sign.loadCookiesFromDir(cookie_path_dir) # This will detect if the JSON file exists, return cookies if it does and raise an Exception if it's not.
+    sign.saveCookiesToDir(cookie_path_dir)
+    cookies = sign.loadCookiesFromDir(cookie_path_dir) # This will detect if the JSON file exists, return cookies if it does and raise an Exception if it's not.
     chatbot = hugchat.ChatBot(cookies=cookies.get_dict())
 
 system_prompt = '''
