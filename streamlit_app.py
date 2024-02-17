@@ -20,8 +20,16 @@ cookies = sign.loadCookiesFromDir(cookie_path_dir) # This will detect if the JSO
 
 chatbot = hugchat.ChatBot(cookies=cookies.get_dict())
 
+system_prompt = '''
+Please summarize the content of the user's sentences in 5 to 10 bullet points or less and translate in Korean. You don't necessarily have to stick to the 10 bullet points, just create enough bullet points to fit the length of the entire sentence.
+At the end of your answer, please select a key sentence from the whole paper and print it at the end, starting with the heading "Key Sentence: ".
+If the user asks a questions in English, provide a Korean translation of your response. If the user asks a question in Korean, you don't need to add a translation.
+'''
+
+chatbot.switch_llm(2)
+
 # start a new conversation
-id = chatbot.new_conversation()
+id = chatbot.new_conversation(system_prompt=system_prompt)
 chatbot.change_conversation(id)
 
 def translation(sentence):
