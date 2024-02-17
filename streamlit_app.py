@@ -10,16 +10,18 @@ st.set_page_config(page_title="Summarise and translate with HuggingChat", page_i
 email = st.secrets["hg_email"]
 passwd = st.secrets["hg_passwd"]
 
-# Log in to huggingface and grant authorization to huggingchat
-# sign = Login(email, passwd)
-# cookies = sign.login()
 
 # Save cookies to the local directory
 cookie_path_dir = "./cookies_snapshot"
-# sign.saveCookiesToDir(cookie_path_dir)
-# cookies = sign.loadCookiesFromDir(cookie_path_dir) # This will detect if the JSON file exists, return cookies if it does and raise an Exception if it's not.
-# chatbot = hugchat.ChatBot(cookies=cookies.get_dict())
-chatbot = hugchat.ChatBot(cookie_path=f"{cookie_path_dir}/{email}.json")
+try:
+    chatbot = hugchat.ChatBot(cookie_path=f"{cookie_path_dir}/{email}.json")
+except:
+    # Log in to huggingface and grant authorization to huggingchat
+    sign = Login(email, passwd)
+    cookies = sign.login()
+    # sign.saveCookiesToDir(cookie_path_dir)
+    # cookies = sign.loadCookiesFromDir(cookie_path_dir) # This will detect if the JSON file exists, return cookies if it does and raise an Exception if it's not.
+    chatbot = hugchat.ChatBot(cookies=cookies.get_dict())
 
 system_prompt = '''
 Please summarize the content of the user's sentences in 5 to 10 bullet points or less and translate in Korean. You don't necessarily have to stick to the 10 bullet points, just create enough bullet points to fit the length of the entire sentence.
