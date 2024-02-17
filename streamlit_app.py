@@ -47,7 +47,7 @@ msg = st.chat_input("Input what you want to summarise")
 # prompt = 'Condense the provided text into concise bullet points, selecting a fitting emoji for each using the contents:'
 # prompt = 'Condense the provided text into English and Korean separately using concise bullet points, and use the content to select the appropriate emoji for each:'
 
-if msg[:7] == 'http://' or msg[:8] == 'https://':
+if str(msg)[:7] == 'http://' or str(msg)[:8] == 'https://':
     downloaded = tft.fetch_url(msg)
     txt = tft.extract(downloaded)
 else:
