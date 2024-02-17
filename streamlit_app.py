@@ -53,6 +53,7 @@ if str(msg)[:7] == 'http://' or str(msg)[:8] == 'https://':
 else:
     txt = msg
 
-msg_res = chatbot.chat(txt)
+if msg:
+    msg_res = chatbot.chat(txt)
 
-st.write(msg_res)
+    st.write(msg_res)
