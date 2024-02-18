@@ -73,6 +73,10 @@ if msg := st.chat_input("Input what you want to summarize"):
     if str(msg)[:7] == 'http://' or str(msg)[:8] == 'https://':
         downloaded = tft.fetch_url(msg)
         txt = tft.extract(downloaded)
+        st.session_state.messages.append({"role": "user", "content": txt})
+        # Display user message in chat message container
+        with st.chat_message("user"):
+            st.markdown(txt)
     else:
         txt = msg
 
