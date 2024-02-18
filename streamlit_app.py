@@ -3,6 +3,7 @@ from hugchat import hugchat
 from hugchat.login import Login
 from deep_translator import GoogleTranslator
 import trafilatura as tft
+import time
 
 
 st.set_page_config(page_title="Summarize with HuggingChat", page_icon="random")
@@ -42,6 +43,12 @@ def translation(sentence):
 
     return translated
 
+def stream_data(msgTxt):
+    for word in msgTxt.split():
+        yield word + " "
+        time.sleep(0.02)
+
+
 st.header("Summary with HuggingChat")
 
 # Initialize chat history
@@ -74,7 +81,7 @@ if msg := st.chat_input("Input what you want to summarize"):
 
     # Display assistant response in chat message container
     with st.chat_message("assistant"):
-        response = st.write_stream(msg_res['text'])
+        response = st.write_stream(stream_data(msg_res['text']))
 
     # Add assistant response to chat history
     st.session_state.messages.append({"role": "assistant", "content": response})
