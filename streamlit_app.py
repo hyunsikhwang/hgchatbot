@@ -56,6 +56,7 @@ else:
     txt = msg
 
 if msg:
-    msg_res = chatbot.chat(txt)
+    # msg_res = chatbot.chat(txt)
+    msg_res = chatbot.query(txt)
 
-    st.write(msg_res)
+    st.write(msg_res.text)
