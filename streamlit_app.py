@@ -5,7 +5,7 @@ from deep_translator import GoogleTranslator
 import trafilatura as tft
 
 
-st.set_page_config(page_title="Summarise and translate with HuggingChat", page_icon="random")
+st.set_page_config(page_title="Summarize with HuggingChat", page_icon="random")
 
 email = st.secrets["hg_email"]
 passwd = st.secrets["hg_passwd"]
@@ -36,15 +36,16 @@ chatbot.switch_llm(2)
 # assign a latest conversation
 id = chatbot.get_remote_conversations(replace_conversation_list=True)[0]
 chatbot.change_conversation(id)
+st.write(id.title)
 
 def translation(sentence):
     translated = GoogleTranslator(source='en', target='ko').translate(sentence)
 
     return translated
 
-st.header("Summary Bot with HuggingChat")
+st.header("Summary with HuggingChat")
 
-msg = st.chat_input("Input what you want to summarise")
+msg = st.chat_input("Input what you want to summarize")
 
 # prompt = 'Condense the provided text into concise bullet points, selecting a fitting emoji for each using the contents:'
 # prompt = 'Condense the provided text into English and Korean separately using concise bullet points, and use the content to select the appropriate emoji for each:'
