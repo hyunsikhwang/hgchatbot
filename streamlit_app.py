@@ -44,19 +44,37 @@ def translation(sentence):
 
 st.header("Summary with HuggingChat")
 
-msg = st.chat_input("Input what you want to summarize")
+# Initialize chat history
+if "messages" not in st.session_state:
+    st.session_state.messages = []
 
-# prompt = 'Condense the provided text into concise bullet points, selecting a fitting emoji for each using the contents:'
-# prompt = 'Condense the provided text into English and Korean separately using concise bullet points, and use the content to select the appropriate emoji for each:'
+# Display chat messages from history on app rerun
+for message in st.session_state.messages:
+    with st.chat_message(message["role"]):
+        st.markdown(message["content"])
 
-if str(msg)[:7] == 'http://' or str(msg)[:8] == 'https://':
-    downloaded = tft.fetch_url(msg)
-    txt = tft.extract(downloaded)
-else:
-    txt = msg
+if msg := st.chat_input("Input what you want to summarize"):
+    # Add user message to chat history
+    st.session_state.messages.append({"role": "user", "content": msg})
+    # Display user message in chat message container
+    with st.chat_message("user"):
+        st.markdown(msg)
 
-if msg:
+    # prompt = 'Condense the provided text into concise bullet points, selecting a fitting emoji for each using the contents:'
+    # prompt = 'Condense the provided text into English and Korean separately using concise bullet points, and use the content to select the appropriate emoji for each:'
+
+    if str(msg)[:7] == 'http://' or str(msg)[:8] == 'https://':
+        downloaded = tft.fetch_url(msg)
+        txt = tft.extract(downloaded)
+    else:
+        txt = msg
+
     # msg_res = chatbot.chat(txt)
     msg_res = chatbot.query(txt)
 
-    st.write(msg_res['text'])
+    # Display assistant response in chat message container
+    with st.chat_message("assistant"):
+        response = st.write_stream(msg_res['text'])
+
+    # Add assistant response to chat history
+    st.session_state.messages.append({"role": "assistant", "content": response})
