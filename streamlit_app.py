@@ -85,7 +85,8 @@ if msg := st.chat_input("Input what you want to summarize"):
 
     # Display assistant response in chat message container
     with st.chat_message("assistant"):
-        response = st.write_stream(stream_data(msg_res['text']))
+        # response = st.write_stream(stream_data(msg_res['text']))
+        response = st.write(msg_res['text'])
 
     # Add assistant response to chat history
     st.session_state.messages.append({"role": "assistant", "content": response})
