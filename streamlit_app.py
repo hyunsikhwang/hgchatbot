@@ -45,7 +45,7 @@ def translation(sentence):
 
 def stream_data(msgTxt):
     for word in msgTxt.split():
-        yield word + " "
+        yield word + "\n"
         time.sleep(0.02)
 
 
