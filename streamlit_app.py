@@ -59,4 +59,4 @@ if msg:
     # msg_res = chatbot.chat(txt)
     msg_res = chatbot.query(txt)
 
-    st.write(msg_res.text)
+    msg.write(msg_res.text)
