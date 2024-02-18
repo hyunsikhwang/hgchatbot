@@ -89,4 +89,4 @@ if msg := st.chat_input("Input what you want to summarize"):
         response = st.write(msg_res['text'])
 
     # Add assistant response to chat history
-    st.session_state.messages.append({"role": "assistant", "content": response})
+    st.session_state.messages.append({"role": "assistant", "content": msg_res['text']})
