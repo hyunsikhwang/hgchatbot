@@ -10,7 +10,6 @@ st.set_page_config(page_title="Summarize with HuggingChat", page_icon="random")
 email = st.secrets["hg_email"]
 passwd = st.secrets["hg_passwd"]
 
-
 # Save cookies to the local directory
 cookie_path_dir = "./cookies_snapshot"
 try:
@@ -36,7 +35,7 @@ id = chatbot.new_conversation(system_prompt=system_prompt)
 # assign a latest conversation
 id = chatbot.get_remote_conversations(replace_conversation_list=True)[0]
 chatbot.change_conversation(id)
-st.write(id.history)
+# st.write(id.history)
 
 def translation(sentence):
     translated = GoogleTranslator(source='en', target='ko').translate(sentence)
