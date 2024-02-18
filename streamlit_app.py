@@ -32,7 +32,9 @@ If the user asks a questions in English, provide a Korean translation of your re
 chatbot.switch_llm(2)
 
 # start a new conversation
-id = chatbot.new_conversation(system_prompt=system_prompt)
+# id = chatbot.new_conversation(system_prompt=system_prompt)
+# assign a latest conversation
+id = chatbot.get_remote_conversations(replace_conversation_list=True)[0]
 chatbot.change_conversation(id)
 
 def translation(sentence):
