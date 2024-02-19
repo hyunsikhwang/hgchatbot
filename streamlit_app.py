@@ -58,14 +58,14 @@ if "messages" not in st.session_state:
 # Display chat messages from history on app rerun
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
-        st.markdown(message["content"])
+        st.write(message["content"])
 
 if msg := st.chat_input("Input what you want to summarize"):
     # Add user message to chat history
     st.session_state.messages.append({"role": "user", "content": msg})
     # Display user message in chat message container
     with st.chat_message("user"):
-        st.markdown(msg)
+        st.write(msg)
 
     # prompt = 'Condense the provided text into concise bullet points, selecting a fitting emoji for each using the contents:'
     # prompt = 'Condense the provided text into English and Korean separately using concise bullet points, and use the content to select the appropriate emoji for each:'
@@ -76,7 +76,7 @@ if msg := st.chat_input("Input what you want to summarize"):
         st.session_state.messages.append({"role": "user", "content": txt})
         # Display user message in chat message container
         with st.chat_message("user"):
-            st.markdown(txt)
+            st.write(txt)
     else:
         txt = msg
 
