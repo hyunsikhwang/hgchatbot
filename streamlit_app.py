@@ -29,7 +29,7 @@ At the end of your answer, please select a key sentence from the whole paper and
 If the user asks a questions in English, provide a Korean translation of your response. If the user asks a question in Korean, you don't need to add a translation.
 '''
 
-chatbot.switch_llm(2)
+chatbot.switch_llm(3)
 
 # start a new conversation
 id = chatbot.new_conversation(system_prompt=system_prompt)
